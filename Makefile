@@ -72,7 +72,7 @@ e2e-install: ## Один раз: ставит npm-зависимости фро�
 	cd front && npm ci && npx playwright install chromium
 
 e2e: ## Прогнать Playwright-тесты против локального стека (через docker compose)
-    set -a && . ./.env.development.e2e && cd front && npm run e2e
+	set -a && . ./.env.development.e2e && cd front && npm run e2e
 
 e2e-deployed: ## Прогнать Playwright-тесты против развернутого инстанса на VPS (нужен .env.production.e2e)
-    set -a && . ./.env.production.e2e && cd front && npm run e2e
+	set -a && . ./.env.production.e2e && cd front && npm run e2e
