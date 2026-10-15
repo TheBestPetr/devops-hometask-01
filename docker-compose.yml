@@ -16,12 +16,14 @@ services:
       start_period: 10s
 
   back:
-    image: ${DOCKERHUB_USERNAME}/todo-back:${IMAGE_TAG}
+    image: ${DOCKERHUB_USERNAME}/todo-back:${APP_VERSION}
     restart: unless-stopped
     platform: linux/amd64
     depends_on:
       db:
         condition: service_healthy
+    environment:
+      APP_VERSION: ${APP_VERSION}
     env_file:
       - .env.development.back
     ports:
@@ -30,12 +32,14 @@ services:
       - ./app-config:/app/config:ro
 
   front:
-    image: ${DOCKERHUB_USERNAME}/todo-front:${IMAGE_TAG}
+    image: ${DOCKERHUB_USERNAME}/todo-front:${APP_VERSION}
     restart: unless-stopped
     platform: linux/amd64
     depends_on:
       back:
         condition: service_started
+    environment:
+      APP_VERSION: ${APP_VERSION}
     ports:
       - "18080:80"
 
